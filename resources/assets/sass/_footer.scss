@@ -1,8 +1,9 @@
 footer {
   background-color: $brand-dark;
-  border-top: solid 5px $brand-primary;
+  border-top: solid 5px $theme-primary;
   color: white;
   padding-bottom: 25px;
+  border-radius: 5px;
   p {
     clear: both;
     text-align: left;

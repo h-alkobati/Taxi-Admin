@@ -19,34 +19,40 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    @yield('top-ext')
+
 </head>
 <body>
-<div class="container-fluid">
 
-    <header class="row">
-        @include('partials.nav')
-    </header>
+<div id="navbar">
+    @include('partials.nav')
+</div>
 
-    <div id="main" class="row">
+    <!-- sidebar content -->
+<div id="sidebar" class="col-md-2">
+        @include('partials.sidebar')
+</div>
 
-        <!-- sidebar content -->
-        <div id="sidebar" class="col-md-2">
-            @include('partials.sidebar')
-        </div>
+    <!-- main content -->
+    <div id="content" class="col-md-offset-2 col-md-10">
 
-        <!-- main content -->
-        <div id="content" class="col-md-10">
             @yield('content')
-        </div>
+
 
     </div>
+
 
 
     <div id="footer" class="col-md-offset-2 col-md-10">
         @include('partials.footer')
     </div>
 
+
 </div>
+
+
 <script src="{{ asset('js/app.js') }}"></script>
+@yield('bottom-ext')
+
 </body>
 </html>

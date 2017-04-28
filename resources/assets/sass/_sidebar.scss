@@ -7,9 +7,10 @@
   position: fixed;
   top: 0px;
   left: 0;
-  width: 250px;
+  width: 15%;
   height: 100%;
-  color: #fff9e9;
+  color: #fffccc;
+  z-index: 10001;
 }
 .nav-side-menu .brand {
   background-color: #23282e;
@@ -17,6 +18,13 @@
   display: block;
   text-align: center;
   font-size: 14px;
+  padding: 80px;
+  background-image: url('../images/logo.jpg');
+  background-size: contain;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  //border: solid 3px $brand-dark;
 }
 .nav-side-menu .toggle-btn {
   display: none;
@@ -93,7 +101,7 @@
 }
 .nav-side-menu li a {
   text-decoration: none;
-  color: #fff9e9;
+  color: #fffccc;
 }
 .nav-side-menu li a i {
   padding-left: 10px;
@@ -109,7 +117,7 @@
   -ms-transition: all 1s ease;
   transition: all 1s ease;
 }
-@media (max-width: 767px) {
+@media (max-width: 992px) {
   .nav-side-menu {
     position: relative;
     width: 100%;
@@ -135,7 +143,7 @@
     line-height: 50px !important;
   }
 }
-@media (min-width: 767px) {
+@media (min-width: 992px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;
   }
