@@ -16,34 +16,51 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'first_name' => $faker->name,
-        'last_name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'phone' => $faker->phoneNumber,
-        'owner_id' => $faker->unique()->randomNumber(3),
-        'owner_type' => $faker->unique()->name,
-        'gender' => 1,
-        'email' => $faker->unique()->safeEmail,
+        //'owner_id' => $faker->unique()->randomNumber(3),
+        //'owner_type' => $faker->randomElement(["App\\Customer","App\\Driver"]),
+        'gender' => $faker->randomElement([1,2]),
+        'email' => $faker->unique()->email,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'dev_id' => $faker->randomNumber(8),
+        'dev_token' => $faker->realText(20),
+
+
     ];
 });
 
 // Temp User
 $factory->define(App\TmpUser::class,function (Faker\Generator $faker){
 	return [
-		'phone' => $faker->randomNumber(9),
+		'phone' => $faker->phoneNumber,
 		'dev_id' => $faker->randomNumber(8),
 		'code' => $faker->randomNumber(4),
-		'last_name' => $faker->randomNumber(4),
-		'first_name' => $faker->randomNumber(4),
-		'email' => $faker->randomNumber(4),
-		'dev_token' => $faker->randomNumber(4),
-		'end_time' => date(strtotime("now+1hour")),
+		'last_name' => $faker->lastName,
+		'first_name' => $faker->firstName,
+		'email' => $faker->email,
+		'dev_token' => $faker->windowsPlatformToken,
+		'end_time' => \Carbon\Carbon::now()->addDays(7),
+        'gender' => $faker->randomElements([1,2]),
 
-	];
+    ];
 
 });
 
+
+//factory(\Staff::class,1)
+//    ->create()
+//    ->each(function($staff)
+//    {
+//        $staff
+//            ->userable()
+//            ->save(
+//                factory(\User::class)
+//                    ->create()
+//            );
+//    });
 
 // Real User
 $factory->define(App\AppUser::class,function (Faker\Generator $faker){
@@ -64,6 +81,7 @@ $factory->define(App\AppUser::class,function (Faker\Generator $faker){
 $factory->define(App\Customer::class,function (Faker\Generator $faker){
 	return [
 		'name' => $faker->name,
+        'image' => $faker->address. $faker->fileExtension,
 	];
 
 });
@@ -71,10 +89,12 @@ $factory->define(App\Customer::class,function (Faker\Generator $faker){
 // Driver User
 $factory->define(App\Driver::class,function (Faker\Generator $faker){
 	return [
-		'driver_licence_no' => $faker->name,
-		'driver_licence_expire_date' => $faker->name,
-		'image' => $faker->name,
-	];
+	    'name' => $faker->name,
+		'driver_licence_no' => $faker->phoneNumber,
+        'dev_id' => $faker->randomNumber(8),
+        //'driver_licence_expire_date' => $faker->name,
+        'image' => $faker->address. $faker->fileExtension,
+    ];
 
 });
 
@@ -82,27 +102,27 @@ $factory->define(App\Driver::class,function (Faker\Generator $faker){
 
 $factory->define(App\Order::class,function (Faker\Generator $faker){
 	return [
-		'place_from_name' => $faker->name,
-		'place_to_name' => $faker->name,
-		'place_from_lat' => $faker->name,
-		'place_from_lng' => $faker->name,
-		'place_to_lat' => $faker->name,
-		'place_to_lng' => $faker->name,
+		'place_from_name' => $faker->streetAddress,
+		'place_to_name' => $faker->streetAddress,
+		'place_from_lat' => $faker->latitude,
+		'place_from_lng' => $faker->longitude,
+		'place_to_lat' => $faker->latitude,
+		'place_to_lng' => $faker->longitude,
 		// 'place_to_lng' => $faker->name,
-		'distance_m' => $faker->randomNumber(2),
-		'distance_k' => $faker->name,
-		'price_total' => 120,
-		'price_distance_k_first' => 3,
-		'price_first' => 30,
-		'price_galon' => 5000,
-		'steps' => 5000,
-		'st'=>'Created',
-		'order_type_id'=>function(){
-			return factory(\App\OrderType::class)->create()->id;
-		},
-		'transportation_id'=>function(){
-			return factory(\App\Transportation::class)->create()->id;
-		},
+		'distance_m' => $faker->randomNumber(4),
+		'distance_k' => (string)$faker->randomNumber(1),
+		'price_total' => $faker->randomNumber(3),
+		'price_distance_k_first' => $faker->randomNumber(2),
+		'price_first' => $faker->randomNumber(2),
+		'price_galon' => $faker->randomNumber(5),
+		'steps' => $faker->paragraph(10),
+		'st'=> $faker->randomElement(['Created','Canceled', 'Unverified']),
+        'dev_id' => $faker->randomNumber(8),
+
+        'app_user_id'=> $faker->randomElement(\App\User::all()->pluck('id')->toArray()) ,
+        'order_type_id'=> $faker->randomElement(\App\OrderType::all()->pluck('id')->toArray()) ,
+		'transportation_id'=> $faker->randomElement(\App\Transportation::all()->pluck('id')->toArray()),
+
 	];
 
 });
@@ -130,10 +150,10 @@ $factory->define(App\Transportation::class,function (Faker\Generator $faker){
 
 $factory->define(App\Setting::class,function (Faker\Generator $faker){
 	return [
-		'name'=>'price 1 km',
-		'name_id'=>'price_one_km',
-		'value'=>'30',
-		'type'=>'integer'
+		'name'=> $faker->name,
+		'name_id'=> $faker->randomNumber(2),
+		'value'=> $faker->randomNumber(2),
+		'type'=> $faker->name,
 	];
 
 });
