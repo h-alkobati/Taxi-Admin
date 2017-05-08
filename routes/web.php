@@ -16,3 +16,12 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/drivers/getData', 'Admin\DriversController@getDriversData');
+
+
+Route::resource('drivers', 'Admin\DriversController');
+Route::resource('passengers', 'Admin\PassengersController');
+
+
+
