@@ -13,7 +13,7 @@ class CreateAppUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_users', function (Blueprint $table) {
+        Schema::create('app_users', function (Blueprint $table) {// this is a negelected table that is not used in this project
             $table->increments('id');
             $table->morphs("owner");
             // $table->string("activ_code")->nullabe();

@@ -17,13 +17,13 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->morphs("owner");
+            $table->morphs("owner"); // for the polimorphic columns owner_id and owner_type,  that link to either the driver or the customer.
 
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->integer('gender');
-            $table->string('dev_id')->nullable();
-            $table->string('dev_token')->nullable();
+            $table->string('dev_id')->nullable(); //device id
+            $table->string('dev_token')->nullable(); //device token
             $table->string('phone');
             $table->rememberToken();
             $table->timestamps();

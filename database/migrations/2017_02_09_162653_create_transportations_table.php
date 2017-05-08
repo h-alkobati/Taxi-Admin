@@ -13,7 +13,7 @@ class CreateTransportationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transportations', function (Blueprint $table) {
+        Schema::create('transportations', function (Blueprint $table) {// types of transporation means. cars, motorcycles and more
             $table->increments('id');
             $table->string('name');
             $table->timestamps();

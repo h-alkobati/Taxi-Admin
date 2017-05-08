@@ -13,14 +13,14 @@ class CreateDriversTable extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {// a driver is always linked to a user
             $table->increments('id');
             $table->string('name');
-            $table->string('dev_id')->nullable();
-            $table->string('driver_licence_no')->nullable();
+            $table->string('dev_id')->nullable();// device id
+            $table->string('driver_licence_no')->nullable(); // driver licence number
             
             
-            $table->string('image')->nullable();
+            $table->string('image')->nullable();// image path
             $table->timestamps();
         });
     }

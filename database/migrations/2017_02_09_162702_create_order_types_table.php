@@ -13,7 +13,7 @@ class CreateOrderTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_types', function (Blueprint $table) {
+        Schema::create('order_types', function (Blueprint $table) {// only two order types
             $table->increments('id');
             $table->string('name');
             
