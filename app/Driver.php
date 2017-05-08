@@ -12,6 +12,6 @@ class Driver extends Model
 
 
     public function user(){
-    	return $this->morphOne(\App\AppUser::class,'owner');
+    	return $this->morphOne(\App\User::class,'owner');
     }
 }
