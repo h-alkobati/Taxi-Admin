@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
         // Main
         // Firebase\Integration\Laravel\FirebaseServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
